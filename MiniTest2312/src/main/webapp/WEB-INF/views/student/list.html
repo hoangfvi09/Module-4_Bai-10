@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div align="center">
+    <table border="1" cellpadding="5">
+        <caption><h2 th:text="${listName}"></h2></caption>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Score</th>
+            <th>Class</th>
+        </tr>
+        <tr th:each="student : ${studentList} ">
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.age}"></td>
+            <td th:text="${student.score}"></td>
+            <td th:text="${student.clazz.name}"></td>
+            <td>
+                <a th:href="@{/edit/__${student.id}__}">Edit</a>
+            </td>
+        </tr>
+    </table>
+    <div >
+        <a th:href="@{'/find'(page=${studentList.number - 1},name=${name})}" th:if="${studentList.hasPrevious()}">Previous</a>
+        <span th:text="${studentList.number+1}"></span>/<span th:text="${studentList.totalPages}"></span>
+        <a th:href="@{'/find'(page=${studentList.number + 1},name=${name})}" th:if="${studentList.hasNext()}">Next</a>
+    </div>
+
+</div>
+
+</body>
+</html>

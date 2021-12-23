@@ -50,7 +50,7 @@ public class LoginController {
 
             // create cookie and set it in response
             Cookie cookie = new Cookie("setUser", setUser);
-            cookie.setMaxAge(24 * 60 * 60);
+            cookie.setMaxAge(30);
             response.addCookie(cookie); // luu nguoi dung vua dang nhap vao cookie
 
             //get all cookies
@@ -70,10 +70,8 @@ public class LoginController {
             model.addAttribute("cookieValue", cookie);
             model.addAttribute("message", "Login success. Welcome ");
         } else {
-
-            setUser = user.getEmail();
+            user.setEmail("");
             Cookie cookie = new Cookie("setUser", setUser);
-            response.addCookie(cookie);
             model.addAttribute("cookieValue", cookie);
             model.addAttribute("message", "Login failed. Try again.");
         }
